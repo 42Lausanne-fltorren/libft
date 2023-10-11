@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fltorren <fltorren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 22:51:30 by fltorren          #+#    #+#             */
-/*   Updated: 2023/10/09 23:18:16 by fltorren         ###   ########.fr       */
+/*   Created: 2023/10/09 15:33:46 by fltorren          #+#    #+#             */
+/*   Updated: 2023/10/11 11:17:32 by fltorren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strchr(const char *str, int c)
 {
-	char	*sub;
+	size_t	i;
+	size_t	len;
 
-	if (!s)
-		return (NULL);
-	if (ft_strlen(s) < start)
-		len = 0;
-	if (ft_strlen(s + start) < len)
-		len = ft_strlen(s + start);
-	sub = (char *) ft_calloc(len + 1, 1);
-	if (!sub)
-		return (NULL);
-	ft_strlcpy(sub, s + start, len + 1);
-	return (sub);
+	len = ft_strlen(str);
+	i = 0;
+	while (i < (len + 1))
+	{
+		if (str[i] == (char) c)
+			return (&((char *) str)[i]);
+		i++;
+	}
+	return (NULL);
 }

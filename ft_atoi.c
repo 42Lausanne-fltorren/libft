@@ -6,7 +6,7 @@
 /*   By: fltorren <fltorren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 14:41:32 by fltorren          #+#    #+#             */
-/*   Updated: 2023/10/09 14:42:07 by fltorren         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:13:26 by fltorren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	ft_atoi(const char *str)
 	while (*str && ft_isspace(*str))
 		str++;
 	sign = 1;
-	while (*str && (*str == '+' || *str == '-'))
+	if (*str && (*str == '-' || *str == '+'))
 	{
 		if (*str == '-')
-			sign *= -1;
+			sign = -1;
 		str++;
 	}
 	nbr = ft_strtonbr(str);

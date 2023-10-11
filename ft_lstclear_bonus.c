@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fltorren <fltorren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 21:28:44 by fltorren          #+#    #+#             */
-/*   Updated: 2023/10/09 22:26:45 by fltorren         ###   ########.fr       */
+/*   Created: 2023/10/10 16:37:07 by fltorren          #+#    #+#             */
+/*   Updated: 2023/10/11 12:10:19 by fltorren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	uint8_t	*b;
-	uint8_t	*l;
-	size_t	i;
-	size_t	j;
+	t_list	*tmp;
+	t_list	*tmp2;
 
-	i = 0;
-	b = (uint8_t *) big;
-	l = (uint8_t *) little;
-	if (*l == '\0' || l == NULL || len == 0)
-		return ((char *) big);
-	while (b[i] && i < len)
+	if (!lst || !del)
+		return ;
+	tmp = *lst;
+	while (tmp)
 	{
-		j = 0;
-		while (b[i + j] == l[j] && i + j < len)
-		{
-			if (l[j + 1] == '\0')
-				return (&((char *) b)[i]);
-			j++;
-		}
-		i++;
+		tmp2 = tmp->next;
+		del(tmp->content);
+		free(tmp);
+		tmp = tmp2;
 	}
-	return (NULL);
+	*lst = NULL;
 }

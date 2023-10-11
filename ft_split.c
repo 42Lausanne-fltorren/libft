@@ -6,7 +6,7 @@
 /*   By: fltorren <fltorren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:11:34 by fltorren          #+#    #+#             */
-/*   Updated: 2023/10/11 09:29:26 by fltorren         ###   ########.fr       */
+/*   Updated: 2023/10/11 12:39:11 by fltorren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,47 @@ static int	count_words(const char *str, char c)
 	return (count);
 }
 
-char	**ft_split(char const *str, char c)
+static char	**free_all(char **dest, size_t i)
 {
-	size_t	i;
-	size_t	j;
-	size_t	k;
-	char	**dest;
+	while (i--)
+		free(dest[i]);
+	free(dest);
+	return (NULL);
+}
 
-	if (str == NULL)
-		return (NULL);
-	dest = (char **) ft_calloc(count_words(str, c) + 1, sizeof(char *));
-	if (!dest)
+static size_t	get_word_len(char const *s, char c)
+{
+	size_t	len;
+
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	return (len);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	char	**dest;
+	size_t	i;
+	size_t	k;
+
+	dest = ft_calloc(count_words(s, c) + 1, sizeof(char *));
+	if (!s || !dest)
 		return (NULL);
 	i = 0;
 	k = 0;
-	while (str[i])
+	while (s[i])
 	{
-		while (str[i] && str[i] == c)
+		while (s[i] == c)
 			i++;
-		j = i;
-		while (str[i] && str[i] != c)
-			i++;
-		if (i > j)
-			dest[k++] = ft_strndup(str + j, i - j);
+		if (s[i])
+		{
+			dest[k] = ft_strndup(s + i, get_word_len(s + i, c));
+			if (!dest[k])
+				return (free_all(dest, k));
+			k++;
+			i += get_word_len(s + i, c);
+		}
 	}
 	dest[k] = NULL;
 	return (dest);

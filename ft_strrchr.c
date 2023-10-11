@@ -6,7 +6,7 @@
 /*   By: fltorren <fltorren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 15:37:32 by fltorren          #+#    #+#             */
-/*   Updated: 2023/10/09 15:39:00 by fltorren         ###   ########.fr       */
+/*   Updated: 2023/10/11 11:16:16 by fltorren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strrchr(const char *str, int c)
 	last = NULL;
 	while (i < (len + 1))
 	{
-		if (str[i] == c)
+		if (str[i] == (char) c)
 			last = (&((char *) str)[i]);
 		i++;
 	}

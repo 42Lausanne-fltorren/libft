@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_lstmap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fltorren <fltorren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/09 15:33:46 by fltorren          #+#    #+#             */
-/*   Updated: 2023/10/09 15:37:00 by fltorren         ###   ########.fr       */
+/*   Created: 2023/10/10 16:45:25 by fltorren          #+#    #+#             */
+/*   Updated: 2023/10/11 12:19:18 by fltorren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int c)
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	size_t	i;
-	size_t	len;
+	t_list	*tail;
+	t_list	*head;
+	void	*content;
 
-	len = ft_strlen(str);
-	i = 0;
-	while (i < (len + 1))
+	if (!lst || !f || !del)
+		return (NULL);
+	head = NULL;
+	while (lst)
 	{
-		if (str[i] == c)
-			return (&((char *) str)[i]);
-		i++;
+		content = f(lst->content);
+		tail = ft_lstnew(content);
+		if (!tail)
+		{
+			del(content);
+			ft_lstclear(&head, del);
+			return (NULL);
+		}
+		ft_lstadd_back(&head, tail);
+		lst = lst->next;
 	}
-	return (NULL);
+	return (head);
 }
