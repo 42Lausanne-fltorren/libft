@@ -6,7 +6,7 @@
 /*   By: fltorren <fltorren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:11:34 by fltorren          #+#    #+#             */
-/*   Updated: 2023/10/10 15:22:38 by fltorren         ###   ########.fr       */
+/*   Updated: 2023/10/11 09:29:26 by fltorren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ char	**ft_split(char const *str, char c)
 	dest = (char **) ft_calloc(count_words(str, c) + 1, sizeof(char *));
 	if (!dest)
 		return (NULL);
-
 	i = 0;
 	k = 0;
 	while (str[i])
