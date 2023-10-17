@@ -6,7 +6,7 @@
 /*   By: fltorren <fltorren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 15:35:08 by fltorren          #+#    #+#             */
-/*   Updated: 2023/10/17 13:41:50 by fltorren         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:45:07 by fltorren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static size_t	get_digits(int n)
 	return (i);
 }
 
-unsigned int	ft_abs(int n)
+static unsigned int	ft_abs(int n)
 {
 	if (n < 0)
 		return ((unsigned int) -n);
